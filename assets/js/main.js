@@ -1,31 +1,22 @@
-const menuToggle = document.querySelector(".menu-toggle");
-const siteNav = document.querySelector(".site-nav");
-
-if (menuToggle && siteNav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-    menuToggle.setAttribute("aria-expanded", String(!isOpen));
-    menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
-    siteNav.classList.toggle("is-open", !isOpen);
-  });
-
-  siteNav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open navigation");
-      siteNav.classList.remove("is-open");
-    });
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open navigation");
-      siteNav.classList.remove("is-open");
-      menuToggle.focus();
-    }
-  });
-}
-
-const year = document.querySelector("#year");
-if (year) year.textContent = new Date().getFullYear();
+const root=document.documentElement;
+const languageSelect=document.getElementById("language");
+const themeButton=document.getElementById("themeToggle");
+const translations={
+tr:{
+navFocus:"Odak alanlarımız",navProjects:"Projeler",navAbout:"Hakkımızda",navContact:"İletişim",badge:"BAĞIMSIZ GELİŞTİRME EKİBİ",heroLine1:"Fikirleri",heroLine2:"yazılıma dönüştürüyoruz.",heroLead:"Faydalı araçlar, özenli deneyimler ve açık kaynak projeler geliştiriyoruz. Küçük fikirlerden gerçek ürünlere uzanan bir yolculuk.",explore:"Projeleri keşfet",visitGithub:"GitHub organizasyonu",meta1:"üretim odaklı",meta2:"paylaşım kültürü",meta3:"sürekli gelişim",
+focusEyebrow:"NEYE ODAKLANIYORUZ?",focusTitle:"Teknoloji, ama bir amacı olsun.",focusLead:"Bizim için iyi bir proje yalnızca çalışmasıyla değil, bir problemi ne kadar anlaşılır ve keyifli çözdüğüyle de değer kazanır.",f1Title:"Masaüstü yazılımları",f1Text:"Günlük iş akışlarını kolaylaştıran, hızlı ve kullanışlı uygulamalar tasarlamak.",f2Title:"Açık kaynak",f2Text:"Projeleri paylaşmak, geliştirmeyi görünür kılmak ve topluluk katkılarına alan açmak.",f3Title:"Arayüz ve deneyim",f3Text:"Detaylara dikkat eden, erişilebilir ve tutarlı kullanıcı deneyimleri oluşturmak.",f4Title:"Deney ve öğrenme",f4Text:"Yeni teknolojileri keşfetmek, fikirleri prototiplere ve prototipleri ürüne dönüştürmek.",
+projectsEyebrow:"MASADAKİ İŞLER",projectsTitle:"Projelerimiz.",projectsLead:"Üzerinde çalıştığımız ve GitHub üzerinden takip edebileceğin işler.",featured:"ÖNE ÇIKAN PROJE",inDev:"GELİŞTİRİLİYOR",projectText:"Kod parçacıklarını ve yapay zekâ promptlarını düzenli tutmak için tasarlanan, çevrimdışı öncelikli masaüstü uygulaması.",repoLink:"Depoyu incele",moreTitle:"Burası büyümeye devam edecek.",moreText:"Yeni projeler ve deneyler şekillendikçe burada yerlerini alacak.",allRepos:"Tüm depolar",
+aboutEyebrow:"EKİBİ TANI",aboutTitle:"Merakla başlar.",aboutP1:"CodeSnip-DevTeam; yazılım üretmek, fikirleri denemek ve işe yarayan çözümleri paylaşmak için bir araya gelen bağımsız bir geliştirme organizasyonudur.",aboutP2:"Sürecin her aşamasında öğrenmeye, geri bildirime ve daha iyisini inşa etmeye önem veriyoruz. Büyük laflardan çok, çalışan ve gelişen projelere odaklanıyoruz.",orgLink:"Organizasyonu GitHub'da gör",v1Title:"Amaca yönelik",v1Text:"Önce problemi anla, sonra sade bir çözüm geliştir.",v2Title:"Detaylara özen",v2Text:"Küçük dokunuşlar, bütün deneyimi değiştirebilir.",v3Title:"Sürekli gelişim",v3Text:"Deneyerek, test ederek ve geri bildirim alarak ilerle.",
+contactEyebrow:"BİR FİKRİN Mİ VAR?",contactTitle:"Konuşalım. Üretelim.",contactText:"Projeler, öneriler veya iş birliği fikirleri için bize ulaşabilirsin.",footerLine:"Fikirleri yazılıma dönüştürüyoruz.",footerMade:"Özenle, kodla ve merakla."
+},
+en:{
+navFocus:"What we do",navProjects:"Projects",navAbout:"About",navContact:"Contact",badge:"INDEPENDENT DEVELOPMENT TEAM",heroLine1:"Turning ideas",heroLine2:"into software.",heroLead:"We build useful tools, thoughtful experiences, and open-source projects. A journey from small ideas to real products.",explore:"Explore projects",visitGithub:"GitHub organization",meta1:"built with purpose",meta2:"open collaboration",meta3:"always improving",
+focusEyebrow:"OUR FOCUS",focusTitle:"Technology with a purpose.",focusLead:"A good project is valuable not only because it works, but because it solves a problem in a clear and enjoyable way.",f1Title:"Desktop software",f1Text:"Designing useful, responsive applications that make everyday workflows easier.",f2Title:"Open source",f2Text:"Sharing projects, making development visible, and welcoming community contributions.",f3Title:"Interface & experience",f3Text:"Creating accessible, consistent experiences with care for the details.",f4Title:"Experiment & learn",f4Text:"Exploring new technologies and turning ideas into prototypes, then products.",
+projectsEyebrow:"WHAT WE'RE BUILDING",projectsTitle:"Our projects.",projectsLead:"Things we're working on and sharing through GitHub.",featured:"FEATURED PROJECT",inDev:"IN DEVELOPMENT",projectText:"An offline-first desktop application designed to keep code snippets and AI prompts organized.",repoLink:"Explore repository",moreTitle:"This space will keep growing.",moreText:"New projects and experiments will appear here as they take shape.",allRepos:"All repositories",
+aboutEyebrow:"MEET THE TEAM",aboutTitle:"It starts with curiosity.",aboutP1:"CodeSnip-DevTeam is an independent development organization built around creating software, exploring ideas, and sharing useful solutions.",aboutP2:"We value learning, feedback, and making each iteration better. Rather than big promises, we focus on projects that work and keep evolving.",orgLink:"Find us on GitHub",v1Title:"Purposeful",v1Text:"Understand the problem first, then build a simple solution.",v2Title:"Attention to detail",v2Text:"Small refinements can change the whole experience.",v3Title:"Always improving",v3Text:"Move forward by experimenting, testing, and listening.",
+contactEyebrow:"HAVE AN IDEA?",contactTitle:"Let's talk. Let's build.",contactText:"Reach out about projects, suggestions, or collaboration ideas.",footerLine:"Turning ideas into software.",footerMade:"Made with care, code, and curiosity."
+}};
+function setLanguage(lang){const dict=translations[lang]||translations.tr;root.lang=lang;document.querySelectorAll("[data-i18n]").forEach(el=>{const value=dict[el.dataset.i18n];if(value)el.textContent=value});languageSelect.value=lang;try{localStorage.setItem("codesnip-team-language",lang)}catch(e){}}
+function setTheme(theme){root.dataset.theme=theme;themeButton.textContent=theme==="dark"?"☼":"☾";themeButton.setAttribute("aria-label",theme==="dark"?"Açık temaya geç":"Koyu temaya geç");const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=theme==="dark"?"#080b10":"#f3f7f5";try{localStorage.setItem("codesnip-team-theme",theme)}catch(e){}}
+languageSelect.addEventListener("change",e=>setLanguage(e.target.value));themeButton.addEventListener("click",()=>setTheme(root.dataset.theme==="dark"?"light":"dark"));
+let lang="tr",theme="dark";try{lang=localStorage.getItem("codesnip-team-language")||"tr";theme=localStorage.getItem("codesnip-team-theme")||"dark"}catch(e){}setLanguage(translations[lang]?lang:"tr");setTheme(theme==="light"?"light":"dark");document.getElementById("year").textContent=new Date().getFullYear();
