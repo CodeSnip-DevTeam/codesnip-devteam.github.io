@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#101820"/>
-  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#78f5c1" stroke-opacity=".55" stroke-width="2"/>
-  <path d="m25 21-11 11 11 11M39 21l11 11-11 11" fill="none" stroke="#e0f2e9" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-  <path d="m35 17-7 30" fill="none" stroke="#f1cd8d" stroke-linecap="round" stroke-width="4"/>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2c8"/><stop offset="1" stop-color="#b7e8ee"/></linearGradient><linearGradient id="mark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#83d5c8"/><stop offset="1" stop-color="#75aeea"/></linearGradient><radialGradient id="glow"><stop stop-color="#42a9ff" stop-opacity=".9"/><stop offset="1" stop-color="#42a9ff" stop-opacity="0"/></radialGradient></defs>
+<rect width="64" height="64" rx="15" fill="url(#bg)"/><circle cx="8" cy="57" r="30" fill="url(#glow)"/>
+<g fill="none" stroke="url(#mark)" stroke-width="3.3" stroke-linejoin="round" stroke-linecap="round"><path d="M32 9 53 20 32 31 11 20Z"/><path d="m11 26 21 12 21-12"/><path d="m11 33 21 12 21-12"/><path d="m27 16-4 4 4 4m10-8 4 4-4 4m-1-10-4 13"/></g>
 </svg>
